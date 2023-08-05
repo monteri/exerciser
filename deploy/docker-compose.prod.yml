@@ -1,0 +1,14 @@
+version: '3.9'
+
+services:
+  nginx:
+    build: ./deploy/nginx
+    depends_on:
+    - web
+    ports:
+    - "80:80"
+    - "443:443"
+    volumes:
+    - ./deploy/nginx:/etc/nginx/conf.d
+    - .:/app
+    - /etc/letsencrypt:/etc/letsencrypt

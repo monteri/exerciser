@@ -6,9 +6,6 @@ __pycache__/
 *.env
 *.env.*
 
-# Ignore development and local settings
-settings.py
-
 # Ignore the database
 db.sqlite3
 
