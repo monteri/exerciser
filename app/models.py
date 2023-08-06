@@ -72,21 +72,25 @@ class SlackUserResponse(Model):
         super(SlackUserResponse, self).save(*args, **kwargs)
 
         if original_answer is None and self.answer is not None:
-            slack_bot.send_message(self.slack_user_id, {
-                "blocks": [
-                    {
-                        "type": "section",
-                        "text": {
-                            "type": "mrkdwn",
-                            "text": f"{''.join([':star:' for _ in range(self.answer.grade)])}",
-                        }
-                    },
-                    {
+            message = {
+                "blocks": []
+            }
+
+            if self.answer.grade > 0:
+                message['blocks'].append({
+                    "type": "section",
+                    "text": {
+                        "type": "mrkdwn",
+                        "text": f"{''.join([':star:' for _ in range(self.answer.grade)])}",
+                    }
+                })
+
+            if self.answer.text:
+                message['blocks'].append({
                         "type": "section",
                         "text": {
                             "type": "mrkdwn",
                             "text": self.answer.text
                         }
-                    }
-                ]
-            })
+                    })
+            slack_bot.send_message(self.slack_user_id, message)

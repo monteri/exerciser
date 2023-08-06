@@ -1,14 +1,11 @@
 import json
 
-from django.db.models import Count, Exists, OuterRef
 from django.http import HttpResponse, JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 
 from .bot.actions import SlackActions
-from .bot.conversations import render_challenge_categories
 from .bot.slack_bot import SlackBot
 from .bot.transformer import SlackApiTransformer
-from .models import Category, Task
 
 from conf import settings
 

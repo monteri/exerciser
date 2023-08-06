@@ -50,6 +50,7 @@ def launch_challenge(modeladmin, request, queryset):
 
 admin.site.register(Category)
 admin.site.register(SlackAnswer)
+admin.site.register(Challenge)
 admin.site.register(SlackUserResponse, SlackUserResponseAdmin)
 
 
