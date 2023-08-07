@@ -37,6 +37,7 @@ MIDDLEWARE = [
 ]
 
 CORS_ALLOW_ALL_ORIGINS = True
+CSRF_TRUSTED_ORIGINS = ['http://62.244.4.30', 'https://pollus.xyz']
 
 ROOT_URLCONF = "conf.urls"
 
