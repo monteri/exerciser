@@ -99,5 +99,3 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 SLACK_TOKEN = os.environ['SLACK_TOKEN']
 SIGNING_SECRET = os.environ['SIGNING_SECRET']
 VERIFICATION_TOKEN = os.environ['VERIFICATION_TOKEN']
-
-CSRF_TRUSTED_ORIGINS = ['https://185d-77-122-224-16.ngrok-free.app']
