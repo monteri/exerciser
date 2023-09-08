@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: exerciser-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: exerciser
+  template:
+    metadata:
+      labels:
+        app: exerciser
+    spec:
+      containers:
+        - name: exerciser-app
+          image: monteri/exerciser:0.5
+          ports:
+            - containerPort: 8000
+          envFrom:
+            - secretRef:
+                name: exerciser-secret

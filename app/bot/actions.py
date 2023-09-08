@@ -24,7 +24,7 @@ class SlackActions:
         task = Task.objects.get(id=self.data.metadata)
         challenge = Challenge.objects.latest('id')
         if SlackUserResponse.objects.filter(challenge=challenge, slack_user_id=self.data.user_id).exists():
-            self.slack_bot.send_message(self.data.user_id, 'Ти вже виконав завдання на цьому тижні!')
+            self.slack_bot.send_message(self.data.user_id, 'Ти вже успішно виконав завдання на цьому тижні! 👍')
             return
         SlackUserResponse.objects.create(
             slack_user_id=self.data.user_id,
@@ -36,7 +36,7 @@ class SlackActions:
         )
         user_streak = get_user_streak(self.data.user_id)
 
-        self.slack_bot.send_message(self.data.user_id, f'Завдання успішно відправлено! Пройдено челенжів поспіль - {user_streak}!')
+        self.slack_bot.send_message(self.data.user_id, f'🎉 Завдання успішно відправлено! 🚀 Ти пройшов(ла) челенжів поспіль: {user_streak}! 👏')
 
     def dispatch_action(self):
         if self.data.type == 'view_submission':

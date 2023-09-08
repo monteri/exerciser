@@ -1,11 +1,6 @@
-FROM python:3.9
+FROM --platform=linux/x86_64 python:3.9
 
 ENV PYTHONUNBUFFERED 1
-
-RUN apt-get update \
-    && apt-get install -y --no-install-recommends \
-        postgresql-client \
-    && rm -rf /var/lib/apt/lists/*
 
 COPY . /app/
 WORKDIR /app

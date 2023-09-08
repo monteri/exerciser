@@ -12,14 +12,14 @@ def render_challenge_categories(categories):
                 "type": "section",
                 "text": {
                     "type": "mrkdwn",
-                    "text": "Ми раді тебе запросити взяти участь у захоплюючому *Weekly Challenge*, що допоможе тобі розвивати свої навички програмування та покращувати свої знання у різних галузях. Тут ти зможеш проявити свою креативність і змагатися з іншими однодумцями.",
+                    "text": "Ми раді тебе запросити взяти участь у *Weekly Challenge* :tada:! Тут ти зможеш взяти участь у цікавих завданнях :jigsaw:, практикуватися в нових технологіях :gear: або покращити свої поточні навички :hammer_and_wrench:. Завдання чекають на тебе!",
                 }
             },
             {
                 "type": "section",
                 "text": {
                     "type": "mrkdwn",
-                    "text": "Обрай категорію, яка тебе найбільш зацікавлює.",
+                    "text": "Обирай категорію :point_down:",
                 }
             },
             {
@@ -48,14 +48,14 @@ def render_challenge_task(task):
                 "type": "section",
                 "text": {
                     "type": "mrkdwn",
-                    "text": f"Завдання: {task.name}",
+                    "text": f"Завдання: *{task.name}* :bookmark_tabs:"
                 }
             },
             {
                 "type": "section",
                 "text": {
                     "type": "mrkdwn",
-                    "text": "Відкрий завдання, де буде запропоновано його скопіювати. Далі розшар доступ для всіх у кого є лінка. Виконавши завдання, скопіюй посилання на Google Doc боту.",
+                    "text": "1️⃣ Відкрий завдання та скопіюй його. \n2️⃣ Надай доступ до Google Doc для всіх, хто має лінк (\"Share\" > \"General Access\" > \"Anyone with the link\"). \n3️⃣ Після виконання, надішли боту посилання на Google Doc."
                 }
             },
             {
@@ -65,7 +65,7 @@ def render_challenge_task(task):
                         "type": "button",
                         "text": {
                             "type": "plain_text",
-                            "text": "Відкрити завдання",
+                            "text": "Відкрити завдання :open_book:",
                             "emoji": True
                         },
                         "value": "0",
@@ -76,7 +76,7 @@ def render_challenge_task(task):
                         "type": "button",
                         "text": {
                             "type": "plain_text",
-                            "text": "Здати завдання",
+                            "text": "Здати завдання :inbox_tray:",
                             "emoji": True
                         },
                         "value": str(task.id),

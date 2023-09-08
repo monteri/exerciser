@@ -1,3 +1,4 @@
+
 from django.contrib.auth.models import User
 from django.core.validators import MinValueValidator, MaxValueValidator
 from django.db.models import (
@@ -5,6 +6,10 @@ from django.db.models import (
 )
 
 from app.bot.slack_bot import SlackBot
+
+MAX_GRADE = 5
+FILLED_START = ":filled_star:"
+EMPTY_STAR = ":empty_star:"
 
 slack_bot = SlackBot()
 
@@ -77,20 +82,22 @@ class SlackUserResponse(Model):
             }
 
             if self.answer.grade > 0:
+                stars = FILLED_START * self.answer.grade + EMPTY_STAR * (MAX_GRADE - self.answer.grade)
                 message['blocks'].append({
                     "type": "section",
                     "text": {
                         "type": "mrkdwn",
-                        "text": f"{''.join([':star:' for _ in range(self.answer.grade)])}",
+                        "text": stars
                     }
                 })
 
             if self.answer.text:
                 message['blocks'].append({
-                        "type": "section",
-                        "text": {
-                            "type": "mrkdwn",
-                            "text": self.answer.text
-                        }
-                    })
+                    "type": "section",
+                    "text": {
+                        "type": "mrkdwn",
+                        "text": self.answer.text
+                    }
+                })
+
             slack_bot.send_message(self.slack_user_id, message)
