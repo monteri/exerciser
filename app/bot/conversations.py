@@ -5,7 +5,7 @@ def render_challenge_categories(categories):
                 "type": "section",
                 "text": {
                     "type": "mrkdwn",
-                    "text": "Привіт, Єноте! :rocket::female-technologist:",
+                    "text": "Привіт, Єноте! :female-technologist:",
                 }
             },
             {

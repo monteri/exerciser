@@ -36,7 +36,7 @@ class SlackActions:
         )
         user_streak = get_user_streak(self.data.user_id)
 
-        self.slack_bot.send_message(self.data.user_id, f'🎉 Завдання успішно відправлено! 🚀 Ти пройшов(ла) челенжів поспіль: {user_streak}! 👏')
+        self.slack_bot.send_message(self.data.user_id, f'🎉 Завдання успішно відправлено! \nТи пройшов(ла) челенжів поспіль: *{user_streak}*! 👏')
 
     def dispatch_action(self):
         if self.data.type == 'view_submission':

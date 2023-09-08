@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: exerciser-app
-          image: monteri/exerciser:0.6
+          image: monteri/exerciser:0.7
           ports:
             - containerPort: 8000
           envFrom:
