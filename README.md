@@ -33,7 +33,7 @@ docker-compose up -d
 # With Kubernetes
 
 ```
-kubectl create secret generic exerciser-configmap --from-env-file=.env
+kubectl create secret generic exerciser-secret --from-env-file=.env
 # Postgres database setup
 kubectl apply -f deploy/kubernetes/persistent-volume-claim.yml
 kubectl apply -f deploy/kubernetes/deployment-db.yml
