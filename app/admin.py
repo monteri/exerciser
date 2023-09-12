@@ -1,3 +1,4 @@
+from django.conf import settings
 from django.contrib import admin, messages
 from django.db.models import OuterRef, Exists, Count
 
@@ -29,7 +30,7 @@ class SlackUserResponseAdmin(admin.ModelAdmin):
 
 
 def launch_challenge(modeladmin, request, queryset):
-    channel = slack_bot.get_bot_channel('test')
+    channel = slack_bot.get_bot_channel(settings.SHARING_CHANNEL_NAME)
     if not channel:
         messages.error(request, "Failed to launch challenge.")
         return

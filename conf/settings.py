@@ -10,7 +10,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = os.environ['SECRET_KEY']
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = os.getenv('DEBUG') == 'true'
 
 ALLOWED_HOSTS = ['*']
 
@@ -37,7 +37,7 @@ MIDDLEWARE = [
 ]
 
 CORS_ALLOW_ALL_ORIGINS = True
-CSRF_TRUSTED_ORIGINS = ['http://62.244.4.30', 'https://pollus.xyz', 'https://exerciser.raccoongang.com']
+CSRF_TRUSTED_ORIGINS = ['http://62.244.4.30', 'https://exerciser.raccoongang.com']
 
 ROOT_URLCONF = "conf.urls"
 
@@ -99,3 +99,4 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 SLACK_TOKEN = os.environ['SLACK_TOKEN']
 SIGNING_SECRET = os.environ['SIGNING_SECRET']
 VERIFICATION_TOKEN = os.environ['VERIFICATION_TOKEN']
+SHARING_CHANNEL_NAME = os.environ['SHARING_CHANNEL_NAME']

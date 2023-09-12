@@ -1,13 +1,12 @@
 import json
 
+from django.conf import settings
 from django.http import HttpResponse, JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 
 from .bot.actions import SlackActions
 from .bot.slack_bot import SlackBot
 from .bot.transformer import SlackApiTransformer
-
-from conf import settings
 
 slack_bot = SlackBot()
 
