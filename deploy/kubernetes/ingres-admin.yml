@@ -1,20 +1,12 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: exerciser-ingres
+  name: exerciser-admin-ingres
   namespace: v-zadorozhnii-dev
   annotations:
-    cert-manager.io/acme-challenge-type: dns01
-    cert-manager.io/cluster-issuer: zerossl-prod
-    external-dns.alpha.kubernetes.io/target: new-k8s-lb.raccoongang.com
     kubernetes.io/ingress.class: nginx
     nginx.ingress.kubernetes.io/ssl-redirect: 'true'
-    nginx.ingress.kubernetes.io/server-snippet: |
-      location = /robots.txt {
-        add_header Content-Type text/plain;
-        return 200 'User-agent: *\nDisallow: /\n';
-      }
-      proxy_ssl_verify off;
+    nginx.ingress.kubernetes.io/whitelist-source-range: 52.31.241.51/32,163.172.126.46/32,77.122.224.16/32
 spec:
   tls:
     - hosts:
@@ -24,7 +16,7 @@ spec:
     - host: exerciser.raccoongang.com
       http:
         paths:
-          - path: /
+          - path: /admin
             pathType: Prefix
             backend:
               service:
