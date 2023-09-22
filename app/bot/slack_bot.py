@@ -36,13 +36,27 @@ class SlackBot:
             print(f"Error fetching users in channel {channel_id}: {e}")
             return []
 
+    def _get_all_channels(self):
+        channels = []
+        cursor = None
+
+        while True:
+            response = self.client.conversations_list(types="public_channel", cursor=cursor)
+            channels.extend(response['channels'])
+
+            cursor = response.get('response_metadata', {}).get('next_cursor')
+            if not cursor:
+                break
+
+        return channels
+
     def get_bot_channel(self, channel_name):
         try:
-            response = self.client.conversations_list(types="public_channel,private_channel")
-            channels = response["channels"]
+            channels = self._get_all_channels()
 
             for channel in channels:
                 if channel['name'] == channel_name:
+                    print(channel['name'])
                     return channel
             return None
         except SlackApiError as e:
