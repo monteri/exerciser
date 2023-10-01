@@ -1,5 +1,6 @@
-from django.urls import path, include
-from .views import api
+from django.urls import include, path
+
+from pdp.api.views import api
 
 urlpatterns = [
     path("api/", include(api.urls)),

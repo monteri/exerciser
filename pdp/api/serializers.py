@@ -1,5 +1,5 @@
-from typing import Optional
 from enum import Enum
+from typing import Optional
 
 
 class CircleStatus(str, Enum):
@@ -17,3 +17,8 @@ class CircleIn:
 
 class CircleOut(CircleIn):
     id: int
+
+
+class LoginInput:
+    username: str
+    password: str

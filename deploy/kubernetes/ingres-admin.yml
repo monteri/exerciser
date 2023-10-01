@@ -6,7 +6,7 @@ metadata:
   annotations:
     kubernetes.io/ingress.class: nginx
     nginx.ingress.kubernetes.io/ssl-redirect: 'true'
-    nginx.ingress.kubernetes.io/whitelist-source-range: 52.31.241.51/32,163.172.126.46/32,77.122.224.16/32
+    nginx.ingress.kubernetes.io/whitelist-source-range: 52.31.241.51/32,163.172.126.46/32,77.122.224.16/32,188.163.51.45/32
 spec:
   tls:
     - hosts:
