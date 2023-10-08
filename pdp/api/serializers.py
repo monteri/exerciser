@@ -1,7 +1,15 @@
 from enum import Enum
-from typing import Optional
+from typing import List, Optional
 
 from pydantic import BaseModel
+
+
+class UserOut(BaseModel):
+    id: int
+    username: str
+    email: str
+    first_name: str
+    last_name: str
 
 
 class CircleStatus(str, Enum):
@@ -25,3 +33,8 @@ class CircleOut(CircleIn):
 class LoginInput(BaseModel):
     username: str
     password: str
+
+
+class FullTextSearchResult(BaseModel):
+    users: List[UserOut]
+    circles: List[CircleOut]
