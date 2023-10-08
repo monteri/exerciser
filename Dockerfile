@@ -5,8 +5,8 @@ ENV PYTHONUNBUFFERED 1
 COPY . /app/
 WORKDIR /app
 
-RUN pip install --upgrade pip \
-    && pip install -r requirements.txt
+RUN apt-get update && apt-get install -y make \
+    && make install
 
 EXPOSE 8000
 

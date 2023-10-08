@@ -1,6 +1,8 @@
 from enum import Enum
 from typing import Optional
 
+from pydantic import BaseModel
+
 
 class CircleStatus(str, Enum):
     TO_DO = "TO_DO"
@@ -8,7 +10,7 @@ class CircleStatus(str, Enum):
     DONE = "DONE"
 
 
-class CircleIn:
+class CircleIn(BaseModel):
     name: str
     description: Optional[str] = None
     parent_id: Optional[int] = None
@@ -17,8 +19,9 @@ class CircleIn:
 
 class CircleOut(CircleIn):
     id: int
+    user_id: int
 
 
-class LoginInput:
+class LoginInput(BaseModel):
     username: str
     password: str
