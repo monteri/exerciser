@@ -39,3 +39,5 @@ tomli==2.0.1
 typing_extensions==4.7.0
 virtualenv==20.24.5
 yarl==1.9.2
+redis==5.0.1
+django-redis==5.4.0

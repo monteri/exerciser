@@ -1,4 +1,5 @@
 import os
+import socket
 from pathlib import Path
 
 from dotenv import load_dotenv
@@ -23,9 +24,10 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    "debug_toolbar",
     "corsheaders",
-    "app",
     "pdp",
+    "app",
 ]
 
 MIDDLEWARE = [
@@ -37,7 +39,16 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
+    "debug_toolbar.middleware.DebugToolbarMiddleware",
 ]
+
+INTERNAL_IPS = [
+    "127.0.0.1",
+]
+
+if DEBUG:
+    hostname, _, ips = socket.gethostbyname_ex(socket.gethostname())
+    INTERNAL_IPS += [ip[:-1] + "1" for ip in ips]
 
 CORS_ALLOW_ALL_ORIGINS = True
 CSRF_TRUSTED_ORIGINS = ["http://62.244.4.30", "https://exerciser.raccoongang.com"]
@@ -89,6 +100,18 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+CACHES = {
+    "default": {
+        "BACKEND": "django_redis.cache.RedisCache",
+        "LOCATION": "redis://redis:6379",
+        "OPTIONS": {
+            "CLIENT_CLASS": "django_redis.client.DefaultClient",
+        },
+    }
+}
+
+SESSION_ENGINE = "django.contrib.sessions.backends.cache"
+SESSION_CACHE_ALIAS = "default"
 
 # Internationalization
 # https://docs.djangoproject.com/en/4.2/topics/i18n/
@@ -110,3 +133,5 @@ SLACK_TOKEN = os.environ["SLACK_TOKEN"]
 SIGNING_SECRET = os.environ["SIGNING_SECRET"]
 VERIFICATION_TOKEN = os.environ["VERIFICATION_TOKEN"]
 SHARING_CHANNEL_NAME = os.environ["SHARING_CHANNEL_NAME"]
+
+ACCOUNTS_PER_PAGE = 20

@@ -1,3 +1,4 @@
+from django.contrib.auth.models import User
 from django.urls import reverse_lazy
 
 import pytest
@@ -6,12 +7,40 @@ from pdp.models import Circle
 
 
 @pytest.mark.django_db
-def test_list_circles(user, auth_client):
+def test_list_circles(auth_client):
+    # Step 1: Create some test data
+    user1 = User.objects.create(
+        username="testuser1", password="password123", first_name="John", last_name="Doe"
+    )
+    user2 = User.objects.create(
+        username="testuser2",
+        password="password123",
+        first_name="Jane",
+        last_name="Smith",
+    )
+
+    # Step 2: Fetch data from the endpoint
     response = auth_client.get(
         reverse_lazy("api:list_circles"), headers=auth_client.headers
     )
-
     assert response.status_code == 200
+    data = response.json()
+
+    # Check the data
+    assert len(data) == 2  # We have created 2 users, so there should be 2 circles
+
+    circle_names = [circle_data["circle"]["name"] for circle_data in data]
+    assert f"{user1.first_name} {user1.last_name}" in circle_names
+    assert f"{user2.first_name} {user2.last_name}" in circle_names
+
+    # Step 3: Test caching by hitting the endpoint again
+    cached_response = auth_client.get(
+        reverse_lazy("api:list_circles"), headers=auth_client.headers
+    )
+    assert cached_response.status_code == 200
+    cached_data = cached_response.json()
+
+    assert data == cached_data
 
 
 @pytest.mark.django_db

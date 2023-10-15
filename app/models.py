@@ -1,9 +1,7 @@
-
 from django.contrib.auth.models import User
-from django.core.validators import MinValueValidator, MaxValueValidator
-from django.db.models import (
-    Model, CharField, ForeignKey, SET_NULL, CASCADE, DateTimeField, BooleanField, TextField, IntegerField
-)
+from django.core.validators import MaxValueValidator, MinValueValidator
+from django.db.models import (CASCADE, SET_NULL, BooleanField, CharField, DateTimeField,
+                              ForeignKey, IntegerField, Model, TextField)
 
 from app.bot.slack_bot import SlackBot
 
@@ -46,9 +44,7 @@ class Challenge(Model):
 
 
 class SlackAnswer(Model):
-    grade = IntegerField(
-        validators=[MinValueValidator(0), MaxValueValidator(5)]
-    )
+    grade = IntegerField(validators=[MinValueValidator(0), MaxValueValidator(5)])
     text = TextField(blank=True)
 
     def __str__(self):
@@ -65,7 +61,9 @@ class SlackUserResponse(Model):
     answer = ForeignKey(SlackAnswer, on_delete=CASCADE, null=True, blank=True)
 
     def __str__(self):
-        return f"User: {self.slack_user_name} ({self.slack_user_name}), Task: {self.task}"
+        return (
+            f"User: {self.slack_user_name} ({self.slack_user_name}), Task: {self.task}"
+        )
 
     def save(self, *args, **kwargs):
         original_answer = None
@@ -77,27 +75,22 @@ class SlackUserResponse(Model):
         super(SlackUserResponse, self).save(*args, **kwargs)
 
         if original_answer is None and self.answer is not None:
-            message = {
-                "blocks": []
-            }
+            message = {"blocks": []}
 
             if self.answer.grade > 0:
-                stars = FILLED_START * self.answer.grade + EMPTY_STAR * (MAX_GRADE - self.answer.grade)
-                message['blocks'].append({
-                    "type": "section",
-                    "text": {
-                        "type": "mrkdwn",
-                        "text": stars
-                    }
-                })
+                stars = FILLED_START * self.answer.grade + EMPTY_STAR * (
+                    MAX_GRADE - self.answer.grade
+                )
+                message["blocks"].append(
+                    {"type": "section", "text": {"type": "mrkdwn", "text": stars}}
+                )
 
             if self.answer.text:
-                message['blocks'].append({
-                    "type": "section",
-                    "text": {
-                        "type": "mrkdwn",
-                        "text": self.answer.text
+                message["blocks"].append(
+                    {
+                        "type": "section",
+                        "text": {"type": "mrkdwn", "text": self.answer.text},
                     }
-                })
+                )
 
             slack_bot.send_message(self.slack_user_id, message)

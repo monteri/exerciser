@@ -16,3 +16,10 @@ if settings.DEBUG is False:  # Only serve static files from Django in production
             r"^static/(?P<path>.*)$", serve, {"document_root": settings.STATIC_ROOT}
         ),
     ]
+
+if settings.DEBUG:
+    import debug_toolbar
+
+    urlpatterns += [
+        re_path(r"^__debug__/", include(debug_toolbar.urls)),
+    ]

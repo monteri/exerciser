@@ -35,6 +35,11 @@ class LoginInput(BaseModel):
     password: str
 
 
+class CircleWithUserOut(BaseModel):
+    circle: CircleOut
+    user: UserOut
+
+
 class FullTextSearchResult(BaseModel):
     users: List[UserOut]
     circles: List[CircleOut]
