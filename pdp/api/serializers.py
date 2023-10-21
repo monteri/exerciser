@@ -1,5 +1,5 @@
 from enum import Enum
-from typing import List, Optional
+from typing import ForwardRef, List, Optional
 
 from pydantic import BaseModel
 
@@ -25,9 +25,18 @@ class CircleIn(BaseModel):
     status: CircleStatus
 
 
+CircleOut_Partial = ForwardRef("CircleOut")
+
+
 class CircleOut(CircleIn):
     id: int
     user_id: int
+    depth: Optional[int]
+    children: Optional[List[CircleOut_Partial]] = []
+
+
+# Update the forward reference to use the actual CircleOut
+CircleOut.update_forward_refs()
 
 
 class LoginInput(BaseModel):

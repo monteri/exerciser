@@ -4,7 +4,7 @@ from django.db.models import Q
 from ninja import Query, Router
 
 from pdp.api.serializers import CircleOut, FullTextSearchResult, UserOut
-from pdp.api.utils.security import auth
+from pdp.api.services.security import auth
 from pdp.models import Circle
 
 search_router = Router()

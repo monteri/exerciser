@@ -4,7 +4,7 @@ from django.test import Client
 
 import pytest
 
-from pdp.api.utils.token_utils import create_tokens
+from pdp.api.services.token_utils import create_tokens
 
 
 @pytest.fixture()

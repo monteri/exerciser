@@ -29,6 +29,7 @@ class Circle(models.Model):
     )
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="circles")
     status = models.CharField(max_length=11, choices=STATUS_CHOICES, default=TO_DO)
+    depth = models.PositiveIntegerField(default=0)
 
     def __str__(self):
         return self.name

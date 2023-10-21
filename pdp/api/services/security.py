@@ -1,6 +1,6 @@
 from ninja.security import HttpBearer
 
-from .token_utils import decode_token
+from pdp.api.services.token_utils import decode_token
 
 
 class AuthenticatedUser(HttpBearer):

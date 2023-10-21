@@ -4,7 +4,7 @@ from django.http import JsonResponse
 from ninja import Router
 
 from pdp.api.serializers import LoginInput
-from pdp.api.utils.token_utils import create_tokens, decode_token
+from pdp.api.services.token_utils import create_tokens, decode_token
 
 auth_router = Router()
 
