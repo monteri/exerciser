@@ -44,6 +44,10 @@ class LoginInput(BaseModel):
     password: str
 
 
+class RefreshInput(BaseModel):
+    refresh: str
+
+
 class CircleWithUserOut(BaseModel):
     circle: CircleOut
     user: UserOut

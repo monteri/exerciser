@@ -26,8 +26,8 @@ def test_list_circles(auth_client):
     assert response.status_code == 200
     data = response.json()
 
-    # Check the data
-    assert len(data) == 2  # We have created 2 users, so there should be 2 circles
+    # We have created 2 users, so there should be 2 circles (auth_user counts)
+    assert len(data) == 3
 
     circle_names = [circle_data["circle"]["name"] for circle_data in data]
     assert f"{user1.first_name} {user1.last_name}" in circle_names

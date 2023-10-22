@@ -2,8 +2,9 @@ from django.contrib.auth import authenticate
 from django.http import JsonResponse
 
 from ninja import Router
+from ninja.errors import HttpError
 
-from pdp.api.serializers import LoginInput
+from pdp.api.serializers import LoginInput, RefreshInput
 from pdp.api.services.token_utils import create_tokens, decode_token
 
 auth_router = Router()
@@ -17,14 +18,14 @@ def login(request, input: LoginInput):
         return JsonResponse(
             {"access_token": access_token, "refresh_token": refresh_token}
         )
-    return JsonResponse({"error": "Invalid credentials"}, status=401)
+    raise HttpError(status_code=401, message="Invalid credentials")
 
 
 @auth_router.post("/refresh/")
-def refresh_token(request, refresh: str):
-    payload = decode_token(refresh, "refresh")
+def refresh_token(request, input: RefreshInput):
+    payload = decode_token(input.refresh, "refresh")
     if not payload:
-        return JsonResponse({"error": "Invalid token"}, status=401)
+        raise HttpError(status_code=401, message="Invalid token")
 
     access_token, _ = create_tokens(payload["user_id"])
     return JsonResponse({"access_token": access_token})
