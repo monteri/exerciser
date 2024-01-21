@@ -1,3 +1,6 @@
 from django.contrib import admin
 
-# Register your models here.
+from pdp.models import Circle, UserAccount
+
+admin.site.register(UserAccount)
+admin.site.register(Circle)

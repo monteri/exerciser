@@ -14,6 +14,10 @@ prod:
 test:
 	docker-compose -f docker-compose.test.yml up --exit-code-from web
 
+# shell
+shell:
+    docker-compose exec -it web /bin/bash
+
 # Run the linters and static analysis tools
 lint:
 	docker-compose -f docker-compose.yml run --rm web flake8 .
