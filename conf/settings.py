@@ -27,8 +27,15 @@ INSTALLED_APPS = [
     "debug_toolbar",
     "corsheaders",
     "pdp",
-    "app",
 ]
+
+SLACK_TOKEN = os.environ["SLACK_TOKEN"]
+SIGNING_SECRET = os.environ["SIGNING_SECRET"]
+VERIFICATION_TOKEN = os.environ["VERIFICATION_TOKEN"]
+SHARING_CHANNEL_NAME = os.environ["SHARING_CHANNEL_NAME"]
+
+if SLACK_TOKEN and VERIFICATION_TOKEN:
+    INSTALLED_APPS.append("app")
 
 MIDDLEWARE = [
     "corsheaders.middleware.CorsMiddleware",
@@ -51,7 +58,7 @@ if DEBUG:
     INTERNAL_IPS += [ip[:-1] + "1" for ip in ips]
 
 CORS_ALLOW_ALL_ORIGINS = True
-CSRF_TRUSTED_ORIGINS = ["http://62.244.4.30", "https://exerciser.raccoongang.com"]
+CSRF_TRUSTED_ORIGINS = []
 
 ROOT_URLCONF = "conf.urls"
 

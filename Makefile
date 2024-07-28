@@ -16,7 +16,7 @@ test:
 
 # shell
 shell:
-    docker-compose exec -it web /bin/bash
+	docker-compose exec -it web /bin/bash
 
 # Run the linters and static analysis tools
 lint:

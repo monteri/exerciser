@@ -10,6 +10,7 @@ POSTGRES_HOST=db
 POSTGRES_PORT=5432
 SLACK_TOKEN= # Slack API token
 SIGNING_SECRET= # Slack sign in secret. Not required for now
+SHARING_CHANNEL_NAME= # Channel to which bot is used
 VERIFICATION_TOKEN= # Slack verification token
 SECRET_KEY= # Django secret
 ```
