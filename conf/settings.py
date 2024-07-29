@@ -136,9 +136,4 @@ STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
-SLACK_TOKEN = os.environ["SLACK_TOKEN"]
-SIGNING_SECRET = os.environ["SIGNING_SECRET"]
-VERIFICATION_TOKEN = os.environ["VERIFICATION_TOKEN"]
-SHARING_CHANNEL_NAME = os.environ["SHARING_CHANNEL_NAME"]
-
 ACCOUNTS_PER_PAGE = 20

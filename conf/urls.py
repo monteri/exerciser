@@ -5,9 +5,11 @@ from django.views.static import serve
 
 urlpatterns = [
     path("admin/", admin.site.urls),
-    path("slack/", include("app.urls")),
     path("api/", include("pdp.urls")),
 ]
+
+if settings.SLACK_TOKEN and settings.VERIFICATION_TOKEN:
+    path("slack/", include("app.urls")),
 
 if settings.DEBUG is False:  # Only serve static files from Django in production mode
     urlpatterns += [
