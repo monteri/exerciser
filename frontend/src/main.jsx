@@ -9,9 +9,10 @@ import store from './store';
 import HomePage from "./pages/HomePage";
 import LoginPage from "./pages/LoginPage";
 import PersonalPage from "./pages/PersonalPage";
-import ProtectedRoutes from "./components/ProtectedRoutes.jsx";
+import ProtectedRoutes from "./components/common/ProtectedRoutes.jsx";
+import MainLayout from "./components/common/MainLayout.jsx";
+
 import './index.css'
-import MainLayout from "./components/MainLayout.jsx";
 
 const router = createBrowserRouter([
   {

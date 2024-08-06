@@ -24,8 +24,17 @@ const authSlice = createSlice({
       state.token = '';
       state.refreshToken = '';
     },
+    initializeAuthState: (state) => {
+      const token = localStorage.getItem('token');
+      const refreshToken = localStorage.getItem('refresh_token');
+      if (token && refreshToken) {
+        state.isAuthenticated = true;
+        state.token = token;
+        state.refreshToken = refreshToken;
+      }
+    },
   },
 });
 
-export const { setCredentials, logout } = authSlice.actions;
+export const { setCredentials, logout, initializeAuthState } = authSlice.actions;
 export default authSlice.reducer;

@@ -1,10 +1,9 @@
-import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-
-const baseUrl = import.meta.env.VITE_API_URL;
+import { createApi } from '@reduxjs/toolkit/query/react';
+import baseQueryWithReauth from "./fetchBaseQuery.js";
 
 export const circlesApi = createApi({
   reducerPath: 'circlesApi',
-  baseQuery: fetchBaseQuery({ baseUrl: `${baseUrl}/api` }),
+  baseQuery: baseQueryWithReauth,
   endpoints: (builder) => ({
     listCircles: builder.query({
       query: () => 'circles/',
